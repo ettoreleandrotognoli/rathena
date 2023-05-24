@@ -60,3 +60,12 @@ jobs:
                   workflow: Build and publish flyway image to Docker Hub
                   token: ${{ secrets.PERSONAL_TOKEN }}
                   inputs: '{ "image_name": "${{ github.event.inputs.image_name_prefix }}-flyway", "image_tag": "${{ github.event.inputs.image_tag }}", "ref" : "${{ github.event.inputs.ref }}" }'
+    build-dev:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Invoke workflow for dev image
+              uses: benc-uk/workflow-dispatch@v1
+              with:
+                  workflow: Build and publish developer image to Docker Hub
+                  token: ${{ secrets.PERSONAL_TOKEN }}
+                  inputs: '{ "image_name": "${{ github.event.inputs.image_name_prefix }}-dev", "image_tag": "${{ github.event.inputs.image_tag }}", "ref" : "${{ github.event.inputs.ref }}" }'
