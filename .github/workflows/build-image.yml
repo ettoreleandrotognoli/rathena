@@ -22,6 +22,11 @@ on:
                 description: "Enable VIP (yes|no)"
                 required: true
                 default: "no"
+            PACKETVER:
+                description: "PACKETVER"
+                required: true
+                default: "20211103"
+
 jobs:
     build-image:
         runs-on: ubuntu-latest
@@ -57,6 +62,7 @@ jobs:
                   build-args: |
                       ENABLE_PRERE=${{ github.event.inputs.prere }}
                       ENABLE_VIP=${{ github.event.inputs.vip }}
+                      PACKETVER=${{ github.event.inputs.PACKETVER }}
                   tags: "rathena/${{ github.event.inputs.image_name }}:${{ github.event.inputs.image_tag }}"
                   platforms: linux/amd64, linux/386, linux/arm64, linux/arm/v7
                   push: true
