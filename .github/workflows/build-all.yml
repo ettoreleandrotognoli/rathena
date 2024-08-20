@@ -14,6 +14,10 @@ on:
                 description: "Branch/Tag/Commit reference"
                 required: true
                 default: "master"
+            PACKETVER:
+                description: "PACKETVER"
+                required: true
+                default: "20211103"
 jobs:
     build-renewal:
         runs-on: ubuntu-latest
@@ -23,7 +27,7 @@ jobs:
               with:
                   workflow: Build and publish image to Docker Hub
                   token: ${{ secrets.PERSONAL_TOKEN }}
-                  inputs: '{ "image_name": "${{ github.event.inputs.image_name_prefix }}-renewal", "image_tag": "${{ github.event.inputs.image_tag }}", "ref" : "${{ github.event.inputs.ref }}", "prere" : "no", "vip" : "no" }'
+                  inputs: '{ "image_name": "${{ github.event.inputs.image_name_prefix }}-renewal", "image_tag": "${{ github.event.inputs.image_tag }}", "ref" : "${{ github.event.inputs.ref }}", "prere" : "no", "vip" : "no", "PACKETVER": "${{ github.event.inputs.PACKETVER }}" }'
     build-prere:
         runs-on: ubuntu-latest
         steps:
@@ -32,7 +36,7 @@ jobs:
               with:
                   workflow: Build and publish image to Docker Hub
                   token: ${{ secrets.PERSONAL_TOKEN }}
-                  inputs: '{ "image_name": "${{ github.event.inputs.image_name_prefix }}-prere", "image_tag": "${{ github.event.inputs.image_tag }}", "ref" : "${{ github.event.inputs.ref }}", "prere" : "yes", "vip" : "no" }'
+                  inputs: '{ "image_name": "${{ github.event.inputs.image_name_prefix }}-prere", "image_tag": "${{ github.event.inputs.image_tag }}", "ref" : "${{ github.event.inputs.ref }}", "prere" : "yes", "vip" : "no", "PACKETVER": "${{ github.event.inputs.PACKETVER }}" }'
     build-renewal-vip:
         runs-on: ubuntu-latest
         steps:
@@ -41,7 +45,7 @@ jobs:
               with:
                   workflow: Build and publish image to Docker Hub
                   token: ${{ secrets.PERSONAL_TOKEN }}
-                  inputs: '{ "image_name": "${{ github.event.inputs.image_name_prefix }}-renewal-vip", "image_tag": "${{ github.event.inputs.image_tag }}", "ref" : "${{ github.event.inputs.ref }}", "prere" : "no", "vip" : "yes" }'
+                  inputs: '{ "image_name": "${{ github.event.inputs.image_name_prefix }}-renewal-vip", "image_tag": "${{ github.event.inputs.image_tag }}", "ref" : "${{ github.event.inputs.ref }}", "prere" : "no", "vip" : "yes", "PACKETVER": "${{ github.event.inputs.PACKETVER }}" }'
     build-prere-vip:
         runs-on: ubuntu-latest
         steps:
@@ -50,7 +54,7 @@ jobs:
               with:
                   workflow: Build and publish image to Docker Hub
                   token: ${{ secrets.PERSONAL_TOKEN }}
-                  inputs: '{ "image_name": "${{ github.event.inputs.image_name_prefix }}-prere-vip", "image_tag": "${{ github.event.inputs.image_tag }}", "ref" : "${{ github.event.inputs.ref }}", "prere" : "yes", "vip" : "yes" }'
+                  inputs: '{ "image_name": "${{ github.event.inputs.image_name_prefix }}-prere-vip", "image_tag": "${{ github.event.inputs.image_tag }}", "ref" : "${{ github.event.inputs.ref }}", "prere" : "yes", "vip" : "yes", "PACKETVER": "${{ github.event.inputs.PACKETVER }}" }'
     build-flyway:
         runs-on: ubuntu-latest
         steps:
